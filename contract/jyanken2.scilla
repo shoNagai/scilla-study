@@ -134,8 +134,10 @@ transition playJyanken (_player : Uint256)
         event e;
         send msgs
     | True =>
+        ph <- previousHand;
         b <- & BLOCKNUMBER;
-        h1 = builtin sha256hash b;
+        bph = builtin badd b ph;
+        h1 = builtin sha256hash bph;
         h2 = builtin sha256hash _sender;
         dis = builtin dist h1 h2;
         uintDis = builtin to_uint256 dis;
